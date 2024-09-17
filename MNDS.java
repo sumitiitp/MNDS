@@ -6,41 +6,56 @@ import java.util.Random;
 
 public class MNDS {
     public static void main(String[] args) {
-        /*double[] objectives1 = new double[3];
+		/* int n = 4; 
+		int d = 3;
+		Point[] population = new Point[n];
+		
+        double[] objectives1 = new double[3];
         objectives1[0] = 2; objectives1[1] = 3; objectives1[2] = 1;
-        population[0] = new Point(0, size, objectives1);
+        population[0] = new Point(0, n, objectives1);
         
         double[] objectives2 = new double[3];
         objectives2[0] = 1; objectives2[1] = 4; objectives2[2] = 1;
-        population[1] = new Point(1, size, objectives2);
+        population[1] = new Point(1, n, objectives2);
         
         double[] objectives3 = new double[3];
         objectives3[0] = 3; objectives3[1] = 2; objectives3[2] = 1;
-        population[2] = new Point(2, size, objectives3);
+        population[2] = new Point(2, n, objectives3);
         
         double[] objectives4 = new double[3];
         objectives4[0] = 4; objectives4[1] = 1; objectives4[2] = 1;
-        population[3] = new Point(3, size, objectives4); */
+        population[3] = new Point(3, n, objectives4); */
 
-        
-        /*double[] objectives1 = new double[3];
+
+
+
+
+		/* int n = 4; 
+		int d = 3;
+		Point[] population = new Point[n];
+		
+        double[] objectives1 = new double[3];
         objectives1[0] = 11; objectives1[1] = 12; objectives1[2] = 13;
-        population[0] = new Point(0, size, objectives1);
+        population[0] = new Point(0, n, objectives1);
         
         double[] objectives2 = new double[3];
         objectives2[0] = 13; objectives2[1] = 12; objectives2[2] = 11;
-        population[1] = new Point(1, size, objectives2);
+        population[1] = new Point(1, n, objectives2);
         
         double[] objectives3 = new double[3];
         objectives3[0] = 4; objectives3[1] = 5; objectives3[2] = 6;
-        population[2] = new Point(2, size, objectives3);
+        population[2] = new Point(2, n, objectives3);
         
         double[] objectives4 = new double[3];
         objectives4[0] = 6; objectives4[1] = 5; objectives4[2] = 4;
-        population[3] = new Point(3, size, objectives4);*/
+        population[3] = new Point(3, n, objectives4);*/
         
-        
-        /* int n = 6;
+		
+		     
+		
+		
+        /* int n = 6; 
+		int d = 4;
         Point[] population = new Point[n];
         
         double[] objectives1 = new double[4];
@@ -73,13 +88,11 @@ public class MNDS {
         int d = 4;
         long seed = 44;
         Point[] population = new Point[n];
-        /* Generate a random population */
-        population = helper.geneartedata(n, d, seed);
+        population = helper.geneartedata(n, d, seed); // Generate a random population
 
         helper.printPopulation(population);
         
         helper.sortMNDS(population); // Sort the population using Merge Non-dominated Sort
-        helper.sortDeductiveSort(population); // Sort the population using Deductive Sort
     }
 }
 
@@ -466,4 +479,3 @@ class HeapSort {
         return Q;
     }
 }
-
