@@ -6,9 +6,9 @@ import java.util.Random;
 
 public class MNDS {
     public static void main(String[] args) {
-		/* int n = 4; 
-		int d = 3;
-		Point[] population = new Point[n];
+	/* int n = 4; 
+	int d = 3;
+	Point[] population = new Point[n];
 		
         double[] objectives1 = new double[3];
         objectives1[0] = 2; objectives1[1] = 3; objectives1[2] = 1;
@@ -30,9 +30,9 @@ public class MNDS {
 
 
 
-		/* int n = 4; 
-		int d = 3;
-		Point[] population = new Point[n];
+	/* int n = 4; 
+	int d = 3;
+	Point[] population = new Point[n];
 		
         double[] objectives1 = new double[3];
         objectives1[0] = 11; objectives1[1] = 12; objectives1[2] = 13;
@@ -55,7 +55,7 @@ public class MNDS {
 		
 		
         /* int n = 6; 
-		int d = 4;
+	int d = 4;
         Point[] population = new Point[n];
         
         double[] objectives1 = new double[4];
