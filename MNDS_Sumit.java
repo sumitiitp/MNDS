@@ -4,95 +4,90 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class MNDS {
+public class MNDS_Sumit {
     public static void main(String[] args) {
-	/* int n = 4; 
-	int d = 3;
-	Point[] population = new Point[n];
-		
-        double[] objectives1 = new double[3];
+        /*int n = 4;
+        int d = 3;
+        Point[] population = new Point[n];
+        
+        double[] objectives1 = new double[d];
         objectives1[0] = 2; objectives1[1] = 3; objectives1[2] = 1;
         population[0] = new Point(0, n, objectives1);
         
-        double[] objectives2 = new double[3];
+        double[] objectives2 = new double[d];
         objectives2[0] = 1; objectives2[1] = 4; objectives2[2] = 1;
         population[1] = new Point(1, n, objectives2);
         
-        double[] objectives3 = new double[3];
+        double[] objectives3 = new double[d];
         objectives3[0] = 3; objectives3[1] = 2; objectives3[2] = 1;
         population[2] = new Point(2, n, objectives3);
         
-        double[] objectives4 = new double[3];
+        double[] objectives4 = new double[d];
         objectives4[0] = 4; objectives4[1] = 1; objectives4[2] = 1;
-        population[3] = new Point(3, n, objectives4); */
+        population[3] = new Point(3, n, objectives4);*/
 
-
-
-
-
-	/* int n = 4; 
-	int d = 3;
-	Point[] population = new Point[n];
-		
-        double[] objectives1 = new double[3];
+        
+        
+        /*int n = 4;
+        int d = 3;
+        Point[] population = new Point[n];
+        double[] objectives1 = new double[d];
         objectives1[0] = 11; objectives1[1] = 12; objectives1[2] = 13;
         population[0] = new Point(0, n, objectives1);
         
-        double[] objectives2 = new double[3];
+        double[] objectives2 = new double[d];
         objectives2[0] = 13; objectives2[1] = 12; objectives2[2] = 11;
         population[1] = new Point(1, n, objectives2);
         
-        double[] objectives3 = new double[3];
+        double[] objectives3 = new double[d];
         objectives3[0] = 4; objectives3[1] = 5; objectives3[2] = 6;
         population[2] = new Point(2, n, objectives3);
         
-        double[] objectives4 = new double[3];
+        double[] objectives4 = new double[d];
         objectives4[0] = 6; objectives4[1] = 5; objectives4[2] = 4;
         population[3] = new Point(3, n, objectives4);*/
         
-		
-		     
-		
-		
-        /* int n = 6; 
-	int d = 4;
+        
+        /*int n = 6;
+        int d = 4;
         Point[] population = new Point[n];
         
-        double[] objectives1 = new double[4];
+        double[] objectives1 = new double[d];
         objectives1[0] = 1; objectives1[1] = 6; objectives1[2] = 1; objectives1[2] = 1;
         population[0] = new Point(0, n, objectives1);
         
-        double[] objectives2 = new double[4];
+        double[] objectives2 = new double[d];
         objectives2[0] = 2; objectives2[1] = 1; objectives2[2] = 2; objectives2[2] = 3;
         population[1] = new Point(1, n, objectives2);
         
-        double[] objectives3 = new double[4];
+        double[] objectives3 = new double[d];
         objectives3[0] = 5; objectives3[1] = 2; objectives3[2] = 4; objectives3[2] = 5;
         population[2] = new Point(2, n, objectives3);
         
-        double[] objectives4 = new double[4];
+        double[] objectives4 = new double[d];
         objectives4[0] = 4; objectives4[1] = 4; objectives4[2] = 6; objectives4[2] = 4;
         population[3] = new Point(3, n, objectives4);
         
-        double[] objectives5 = new double[4];
+        double[] objectives5 = new double[d];
         objectives5[0] = 3; objectives5[1] = 5; objectives5[2] = 2; objectives5[2] = 3;
         population[4] = new Point(4, n, objectives5);
         
-        double[] objectives6 = new double[4];
+        double[] objectives6 = new double[d];
         objectives6[0] = 6; objectives6[1] = 3; objectives6[2] = 6; objectives6[2] = 8;
-        population[5] = new Point(5, n, objectives6); */
+        population[5] = new Point(5, n, objectives6);*/
 
         
         Helper helper = new Helper();
-        int n = 10;
-        int d = 4;
-        long seed = 44;
+        int n = 10; // Number of points in the population
+        int d = 4; // Size of the objective vector associated with the point
+        long seed = 4545;
         Point[] population = new Point[n];
         population = helper.geneartedata(n, d, seed); // Generate a random population
 
         helper.printPopulation(population);
         
         helper.sortMNDS(population); // Sort the population using Merge Non-dominated Sort
+        helper.sortDeductiveSort(population); // Sort the population using Deductive Sort to verify the result
     }
 }
 
@@ -243,6 +238,7 @@ class Helper {
     }
     
     public void sortMNDS(Point population[]) {
+        System.out.println("\n************* MNDS *************");
         int n = population.length; // Number of points in the population
         int noObj = population[0].getObjectives().length; // Size of the objective vector associated with the point
   
@@ -254,7 +250,9 @@ class Helper {
         int[] Q0 = new int[n]; // Stores the ids of the sorted points based on the first objective 
         int[] Q1 = new int[n]; // Stores the ids of the sorted points based on the second objective 
         int[] Qm = new int[n]; // Stores the ids of the sorted points based on the remaining objectives
-        int[] ranks = new int[n]; // Array to store the rank of the points
+        int[] ranks = new int[n]; // Array to find the index of the point based on the id of the point
+        
+        int[] QIndex = new int[n]; // An array to locate the index the ids of the sorted points based on the remaining objectives
         int PIndex;
         for(int i = 0; i < n; i++) {
             Q0[i] = population[i].getId();
@@ -267,12 +265,16 @@ class Helper {
         for(int i = 0; i < n; i++) {
             population[Q0[i]].setIndex(i);
         }
+        for(int i = 0; i < n; i++) {
+            QIndex[i] = population[Q0[i]].getId();
+        }
+        
         System.out.println("\nQ0 = " + Arrays.toString(Q0));
         printPopulation(population);
 
         Q1 = hs.sortm(population, Q1, Q0, 1); // Sort the points based on the second objective
         System.out.println("\nQ1 = " + Arrays.toString(Q1));
-        printPopulation(population);
+        
         
         /* Obtain the dominance set based on the first two objectives */
         boolean hasDominance = false; // A boolean variable to chcek whether any point is dominated based of the first two objectives
@@ -284,8 +286,7 @@ class Helper {
                 //population[Q2[i]].getDominanceSet().and(ods);
                 /* Subset method */
                 int top = Math.min(PIndex-1, odsMax);
-//                for (int j = odsMin; j <= top && j >= 0; j = ods.nextSetBit(j+1)) {
-                for (int j = odsMin; j >= 0; j = ods.nextSetBit(j+1)) {
+                for (int j = odsMin; j <= top && j >= 0; j = ods.nextSetBit(j+1)) {
                     population[Q1[i]].set(j);
                 }
                 hasDominance = true;
@@ -295,6 +296,8 @@ class Helper {
                 odsMax = PIndex;
             }
         }
+        printPopulation(population);
+        
         
         if(hasDominance) { // If one of the point is dominated considering the dominance set based on the first two objectives 
             int m = 2;
@@ -315,18 +318,15 @@ class Helper {
                 printPopulation(population);
                 m = m + 1;
             }
-            
-            int[] QIndex = new int[n];
-            for(int i = 0; i < n; i++) {
-                QIndex[i] = population[Qm[i]].getIndex();
-            }
 
+            
+            System.out.println("\nQIndex = " + Arrays.toString(QIndex));
             ranks[Qm[0]] = 1;
             for(int i = 1; i < n; i++) {
                 int myRank = 1;
                 for (int j = population[Qm[i]].getDominanceSet().nextSetBit(0); j >= 0; 
                     j = population[Qm[i]].getDominanceSet().nextSetBit(j+1)) {
-                    int thatRank = ranks[Qm[QIndex[j]]];
+                    int thatRank = ranks[QIndex[j]];
                     if(thatRank >= myRank) {
                         myRank = thatRank + 1;
                     }
@@ -347,12 +347,9 @@ class Helper {
     }
     
     public void sortDeductiveSort(Point population[]) {
-        System.out.println("************* DS ************* ");
+        System.out.println("\n************* Deductive Sort *************");
         double noDC = 0; // No of dominance comparisons
         int timecomp = 0;
-        double noCheck = 0; // No of dominance comparisons
-        
-        int x = 0;
         int f = 0;
         ArrayList<ArrayList<Integer>> setNonDominatedFront = new ArrayList();
         boolean[] isSorted = new boolean[population.length];
@@ -382,9 +379,7 @@ class Helper {
                         isSorted[i] = true;
                         f++;
                     }
-                } else {
-
-                }
+                } 
             }
             setNonDominatedFront.add(ndf);
         }
